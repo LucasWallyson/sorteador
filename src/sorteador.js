@@ -1,36 +1,49 @@
 class Sorteador {
     constructor(){
         this.NumeroSorteados = [];
-
-        // this.formEl = document.getElementById('form');
-        this.QuantityEl = document.getElementById('Quantity').value;
-        this.minEl = document.getElementById('min').value;
-        this.maxEl = document.getElementById('max').value;
         
-        this.Sortear();
+        this.listEl = document.getElementById('ver');
+        this.QuantityEl = parseInt(document.getElementById('Quantity').value);
+        this.minEl = parseInt(document.getElementById('min').value);
+        this.maxEl = parseInt(document.getElementById('max').value);
+        this.getRandomInt(this.minEl,this.maxEl);
+        
     }
-    // getRandomIntInclusive(){
-    //     (min, max) => {
-    //         min = Math.ceil(min);
-    //         max = Math.floor(max);
-    //         return Math.floor(Math.random() * (max - min + 1)) + min;
-    //       }  
-    // }
+    VerNS(){
+        let Mostrar = this.NumeroSorteados;
+        let element = document.createElement('li');
+        let textelement = document.createTextNode(Mostrar);
 
-    Sortear (){
-        let Quantity1 = this.QuantityEl;
-        let min = this.minEl;
-        let max = this.maxEl;
-        if(min > 0 && max < 9999 && min < max){
-          for(var i = 1; i <= Quantity1;i++){
-            let guardar = Math.floor(Math.random() * (max - min) + min);
-              this.NumeroSorteados.push(guardar);
-              console.log(this.NumeroSorteados);
-          }
-            }else {
-                console.log("error");
-                
-            } 
+        element.appendChild(textelement);
+        this.listEl.appendChild(element);
+
+    }
+    getRandomInt(min, max) {
+        if (this.QuantityEl < 0 ){  
+            alert("Não é possivel, calcular com numeros negativos!");
+            return;
+        }
+        if (this.QuantityEl == 0 && this.QuantityEl == 0){
+            alert("É Preciso inserir um Valor!");
+            return;
+        }
+        if(this.QuantityEl > this.maxEl) {
+            alert("O número da quantidade é maior que o valor máximo");
+            return;
+        }
+        if(this.minEl > 0 && this.maxEl < 9999 && this.minEl < this.maxEl ){
+            for(var i = 1; i <= this.QuantityEl;i++){
+                min = Math.floor(min);
+                max = Math.floor(max);
+                let guardar = Math.round(Math.random() * (max - min)) + min ;
+                this.NumeroSorteados.push(guardar);
+                console.log(this.NumeroSorteados);
+                }
+                this.VerNS();
+                // if(this.QuantityEl > 0){
+                //     alert(`numeros Sorteados são : ${this.NumeroSorteados}`);
+                // }             
+        }
     }
 }
 
@@ -40,5 +53,4 @@ document.getElementById("sortear").addEventListener('click', function(event) {
 });
 
 
-  
-  
+
