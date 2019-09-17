@@ -1,7 +1,7 @@
 class Sorteador {
     constructor(){
         this.NumeroSorteados = [];
-        
+     
         this.listEl = document.getElementById('ver');
         this.QuantityEl = parseInt(document.getElementById('Quantity').value);
         this.minEl = parseInt(document.getElementById('min').value);
@@ -10,13 +10,14 @@ class Sorteador {
         
     }
     VerNS(){
-        let Mostrar = this.NumeroSorteados;
-        let element = document.createElement('li');
-        let textelement = document.createTextNode(Mostrar);
-
-        element.appendChild(textelement);
-        this.listEl.appendChild(element);
-
+        const NumeroTratado = this.NumeroSorteados.join('-');
+        let Mostrar = NumeroTratado;
+        document.getElementById("ver").textContent = Mostrar;
+        // let element = document.createElement('p');
+        // let textelement = document.createTextNode(Mostrar);
+        // element.appendChild(textelement);
+        // this.listEl.appendChild(element);
+        // NumeroTratado.innerHTML = "";
     }
     getRandomInt(min, max) {
         if (this.QuantityEl < 0 ){  
@@ -38,6 +39,7 @@ class Sorteador {
                 let guardar = Math.round(Math.random() * (max - min)) + min ;
                 this.NumeroSorteados.push(guardar);
                 console.log(this.NumeroSorteados);
+                
                 }
                 this.VerNS();
                 // if(this.QuantityEl > 0){
@@ -49,6 +51,7 @@ class Sorteador {
 
 document.getElementById("sortear").addEventListener('click', function(event) {
     event.preventDefault();
+   
     new Sorteador();
 });
 
