@@ -1,25 +1,44 @@
+
 class Sorteador {
     constructor(){
+
         this.NumeroSorteados = [];
-     
-        this.listEl = document.getElementById('ver');
+        
+        this.isloading = false; 
         this.QuantityEl = parseInt(document.getElementById('Quantity').value);
         this.minEl = parseInt(document.getElementById('min').value);
         this.maxEl = parseInt(document.getElementById('max').value);
-        this.getRandomInt(this.minEl,this.maxEl);
-        
+        this.showLoading();
+    }
+    setloading(){
+        return this.isloading = !this.isloading;
+    }
+    // hiddenloading(){
+    //     img.style.visibility = hidden;
+    // }
+    showLoading(){
+        this.setloading();
+        if(this.isloading == true){ 
+            let pegarimg = document.getElementById('Image');
+            pegarimg.style.width = "60px";
+            pegarimg.style.height = "60px";
+            pegarimg.style.visibility = "visible";
+            pegarimg.style.transform = "translate(530%, -15%)";
+            pegarimg.src = "https://www.upgestao.com.br/wp-content/themes/softa/images/loading.gif?x97643";            
+
+            setTimeout(() => {
+                pegarimg.style.visibility = "hidden";
+                this.getRandomInt(this.minEl, this.maxEl);
+            }, 3000);
+
+        }
     }
     VerNS(){
         const NumeroTratado = this.NumeroSorteados.join('-');
         let Mostrar = NumeroTratado;
         document.getElementById("ver").textContent = Mostrar;
-        // let element = document.createElement('p');
-        // let textelement = document.createTextNode(Mostrar);
-        // element.appendChild(textelement);
-        // this.listEl.appendChild(element);
-        // NumeroTratado.innerHTML = "";
     }
-    getRandomInt(min, max) {
+    getRandomInt(min, max) {    
         if (this.QuantityEl < 0 ){  
             alert("Não é possivel, calcular com numeros negativos!");
             return;
@@ -32,7 +51,7 @@ class Sorteador {
             alert("O número da quantidade é maior que o valor máximo");
             return;
         }
-        if(this.minEl > 0 && this.maxEl < 9999 && this.minEl < this.maxEl ){
+        if(this.minEl > 0 && this.minEl < this.maxEl ){
             for(var i = 1; i <= this.QuantityEl;i++){
                 min = Math.floor(min);
                 max = Math.floor(max);
@@ -41,10 +60,7 @@ class Sorteador {
                 console.log(this.NumeroSorteados);
                 
                 }
-                this.VerNS();
-                // if(this.QuantityEl > 0){
-                //     alert(`numeros Sorteados são : ${this.NumeroSorteados}`);
-                // }             
+                this.VerNS();            
         }
     }
 }
